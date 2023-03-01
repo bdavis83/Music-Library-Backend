@@ -22,3 +22,19 @@ def songs_list (request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response (serializer.data, status = status.HTTP_201_CREATED)
+    
+
+@api_view (['GET', 'PUT', 'DELETE'])
+def songs_details (request, pk):
+    songs_var = get_object_or_404(Songs, pk=pk)
+    if request.method == 'GET':
+        serializer = SongsSerializer(songs_var)
+        return Response (serializer.data)
+    elif request.method == 'PUT':
+        serializer = SongsSerializer(songs_var, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response (serializer.data)
+    elif request.method == 'DELETE':
+        songs_var.delete()
+        return Response (status=status.HTTP_204_NO_CONTENT)
