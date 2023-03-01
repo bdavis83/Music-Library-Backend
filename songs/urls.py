@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-urlpattersns = [
+urlpatterns = [
     path('', views.songs_list),
-  #  path ('<int:pk>/', views.songs_list),
+    path ('<int:pk>/', views.songs_details),
 ]
